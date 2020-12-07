@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Baumans&display=swap');
+
+
 .App {
   text-align: center;
+  font-family: 'Baumans', cursive;
+}
+
+body {
+  margin: 0;
+  background-color: #EEEEEE;
+}
+
+.Articles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center
 }
