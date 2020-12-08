@@ -36,3 +36,7 @@ export const postComment = (id, comment) => {
         return res.data.comment
     })
 }
+
+export const deleteCommentById = (id) => {
+    return ncNewsApi.delete(`/comments/${id}`)
+}

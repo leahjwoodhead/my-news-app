@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
-import { fetchCommentsById } from './api'
+import { fetchCommentsById, deleteCommentById } from './api'
 import CommentCard from './CommentCard'
 import PostComment from './PostComment';
+
 
 const CommentsHolder = styled.div`
     border: 2px solid orange;
@@ -32,6 +33,17 @@ class Comments extends Component {
         })
     }
 
+    deleteComment = (id) => {
+        deleteCommentById(id).then(() => {
+            this.setState(currState => {
+                const filteredComments = currState.comments.filter(comment => comment.comment_id !== id)
+                const newState = { comments: filteredComments}
+
+                return newState
+            })
+        })
+    }
+
     render() {
         const { id } = this.props
         const { comments } = this.state
@@ -39,10 +51,10 @@ class Comments extends Component {
             <>
             <CommentsHolder>
                 {comments.map(comment => {
-                    return <CommentCard comment={comment}/>
+                    return <CommentCard comment={comment} deleteComment={this.deleteComment}/>
                 })}
             </CommentsHolder>
-            <PostComment id={id} addComment={this.addComment}/>
+            <PostComment id={id} addComment={this.addComment} />
             </>
         );
     }
