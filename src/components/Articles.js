@@ -48,13 +48,13 @@ class Articles extends Component {
             )
         } else {
             return (
-                <div className="Articles">
+                <ul className="Articles">
                     {this.state.articles.map(article => {
                         return (
                             <ArticleCard key={article.article_id} article={article}/>
                         )
                     })}
-                </div> 
+                </ul> 
             )     
         }
     }

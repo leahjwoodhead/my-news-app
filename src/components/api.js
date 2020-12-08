@@ -40,3 +40,14 @@ export const postComment = (id, comment) => {
 export const deleteCommentById = (id) => {
     return ncNewsApi.delete(`/comments/${id}`)
 }
+
+export const addVotesToArticle = (id, inc) => {
+    const votes = {
+        inc_votes: 0
+    }
+    if (inc === 'up') votes.inc_votes++
+    if (inc === 'down') votes.inc_votes--
+    return ncNewsApi.patch(`articles/${id}`, votes).then(res => {
+        return res.data.article
+    })
+}

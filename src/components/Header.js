@@ -9,6 +9,15 @@ const Title = styled.header`
     padding-left: 5vw;
     align-items: center;
     grid-area: header;
+    animation: backgroundBlinker 10s linear;
+
+    @keyframes backgroundBlinker{
+        0%   {background-color:red; left:0px; top:0px;}
+        25%  {background-color:yellow; left:200px; top:0px;}
+        50%  {background-color:blue; left:200px; top:200px;}
+        75%  {background-color:green; left:0px; top:200px;}
+        100% {background-color:red; left:0px; top:0px;}
+    }
 
 `
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchArticleById } from './api'
+import { fetchArticleById, addVotesToArticle } from './api'
 import { css } from "@emotion/core";
 import PacmanLoader from 'react-spinners/PacmanLoader'
 import ErrorMessage from './ErrorMessage'
@@ -12,11 +12,12 @@ const override = css`
   border-color: red;
 `;
 
-const ArticleHolder = styled.div`
+const ArticleHolder = styled.article`
     border: 2px solid orange;
     border-radius: 10px;
     margin: 3vw 10vw;
     height: 40vw;
+    background-color: white;
 `
 
 const ArticleTitle = styled.h1`
@@ -43,6 +44,15 @@ class SingleArticle extends Component {
             this.setState({hasError: true, loading: false, errorMessage: `ERROR - Status ${status}: ${statusText}`})
         })
     }
+
+    addVote = (event) => {
+        const { article_id } = this.props
+        const inc = event.target.id
+        addVotesToArticle(article_id, inc).then(article => {
+            this.setState({article})
+        })
+    }
+
     render() {
         const { article, loading, hasError, errorMessage } = this.state
         const { article_id } = this.props
@@ -67,6 +77,8 @@ class SingleArticle extends Component {
                     <p>{article.body}</p>
                     <p>By {article.author}</p>
                     <p>Votes: {article.votes}</p>
+                    <button id="up" onClick={this.addVote}>Yay</button>
+                    <button id="down" onClick={this.addVote}>Boo</button>
                 </ArticleHolder>
                 <Comments id={article_id}/>
                 </>

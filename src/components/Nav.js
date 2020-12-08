@@ -30,8 +30,9 @@ class Nav extends Component {
     render() {
         if (this.state.loading) {
             return (
-                <>
-                </>
+                <nav>
+                    <p>Loading</p>
+                </nav>
             )
         } else {
             return (

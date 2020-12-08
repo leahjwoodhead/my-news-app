@@ -8,6 +8,7 @@ const CommentFormHolder = styled.div`
     margin: 3vw 10vw;
     height: 100px;
     text-align: left;
+    background-color: white;
 `
 class PostComment extends Component {
 
