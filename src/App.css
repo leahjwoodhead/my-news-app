@@ -4,6 +4,12 @@
 .App {
   text-align: center;
   font-family: 'Baumans', cursive;
+  display: grid;
+  grid-template-rows: 400px auto;
+  grid-template-columns: 300px auto ;
+  grid-template-areas: 
+   'header header'
+   'sidebar page';
 }
 
 body {
@@ -14,5 +20,13 @@ body {
 .Articles {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center
+  justify-content: center;
+  grid-area: page;
+}
+
+nav {
+  grid-area: sidebar;
+  display: grid;
+  text-align: left;
+  grid-template-rows: 150px 150px 150px 150px;
 }

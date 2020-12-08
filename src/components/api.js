@@ -24,3 +24,9 @@ export const fetchArticleById = (id) => {
         return res.data.article
     })
 }
+
+export const fetchCommentsById = (id) => {
+    return ncNewsApi.get(`/articles/${id}/comments`).then((res) => {
+        return res.data.comments
+    })
+}

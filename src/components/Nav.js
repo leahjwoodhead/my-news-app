@@ -3,6 +3,19 @@ import styled from 'styled-components'
 import { Link } from '@reach/router'
 import { fetchTopics } from './api'
 
+const NavButton = styled.button`
+    border: none;
+    font-size: 2vw;
+    width: 100%;
+    color: #DF3B57;
+    height: 150px;
+    &:hover {
+        background-color: pink;
+        color:white;
+
+    }
+`
+
 class Nav extends Component {
     state = {
         topics: [],
@@ -23,10 +36,11 @@ class Nav extends Component {
         } else {
             return (
                 <nav>
-                    <Link to="/">Home</Link>
+                    <Link to="/"><NavButton>HOME</NavButton></Link>
                     {this.state.topics.map(topic => {
                         return (
-                            <Link to={`/articles/${topic.slug}`}>{topic.slug}</Link>
+                            <Link to={`/articles/${topic.slug}`}><NavButton slug={topic.slug
+                            }>{topic.slug.toUpperCase()}</NavButton></Link>
                         )})}
                 </nav>
             ) 

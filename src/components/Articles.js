@@ -41,8 +41,8 @@ class Articles extends Component {
             return (
                 <PacmanLoader
                   css={override}
-                  size={150}
-                  color={"#123abc"}
+                  size={100}
+                  color={"#DF3B57"}
                   loading={this.state.loading}
                 />
             )

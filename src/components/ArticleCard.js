@@ -3,10 +3,11 @@ import styled from 'styled-components'
 import {Link} from '@reach/router'
 
 const Article = styled.div`
-    border: 1px solid;
+    border: 1px dashed;
     width: 40%;
     height: 200px;
     margin: 10px;
+    color: #DF3B57;
 `
 
 const ArticleCard = (props) => {
