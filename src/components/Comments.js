@@ -25,6 +25,13 @@ class Comments extends Component {
         })
     }
 
+    addComment = (comment) => {
+        this.setState(currState => {
+            const newState = {comments: [comment, ...currState.comments]}
+            return newState
+        })
+    }
+
     render() {
         const { id } = this.props
         const { comments } = this.state
@@ -35,7 +42,7 @@ class Comments extends Component {
                     return <CommentCard comment={comment}/>
                 })}
             </CommentsHolder>
-            <PostComment/>
+            <PostComment id={id} addComment={this.addComment}/>
             </>
         );
     }

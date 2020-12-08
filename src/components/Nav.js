@@ -39,7 +39,7 @@ class Nav extends Component {
                     <Link to="/"><NavButton>HOME</NavButton></Link>
                     {this.state.topics.map(topic => {
                         return (
-                            <Link to={`/articles/${topic.slug}`}><NavButton slug={topic.slug
+                            <Link to={`/articles/${topic.slug}`} key={topic.slug}><NavButton slug={topic.slug
                             }>{topic.slug.toUpperCase()}</NavButton></Link>
                         )})}
                 </nav>

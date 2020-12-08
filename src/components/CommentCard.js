@@ -11,9 +11,11 @@ const SingleComment = styled.div`
 const CommentCard = (props) => {
     const {comment} = props
     return (
-        <SingleComment>
+        <SingleComment key={comment.comment_id}>
             <p>{comment.body}<br/>{comment.author}
             </p>
+            <p>{comment.created_at}</p>
+            <p>{comment.votes}</p>
         </SingleComment>
     );
 };

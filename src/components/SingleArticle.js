@@ -38,7 +38,7 @@ class SingleArticle extends Component {
         const { article_id } = this.props
         fetchArticleById(article_id).then(article => {
             this.setState({article, loading: false})
-        }).catch(err => {
+        }).catch((err) => {
             const { status, statusText } = err.response
             this.setState({hasError: true, loading: false, errorMessage: `ERROR - Status ${status}: ${statusText}`})
         })
