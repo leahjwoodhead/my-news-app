@@ -17,7 +17,7 @@ const ArticleHolder = styled.article`
     border: 2px solid orange;
     border-radius: 10px;
     margin: 3vw 10vw;
-    height: 40vw;
+    height: auto;
     background-color: white;
 `
 

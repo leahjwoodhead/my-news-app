@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import { Link } from '@reach/router'
-import { fetchTopics } from './api'
+import { fetchArticles, fetchTopics } from './api'
 
 const NavButton = styled.button`
     border: none;
@@ -19,7 +19,7 @@ const NavButton = styled.button`
 class Nav extends Component {
     state = {
         topics: [],
-        loading: true
+        loading: true,
     }
     componentDidMount() {
         fetchTopics().then((topics) => {

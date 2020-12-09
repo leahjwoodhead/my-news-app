@@ -31,7 +31,6 @@ const ArticleDate = styled.p`
 
 const ArticleCard = (props) => {
     const { article } = props
-    console.log(article)
     return (
         <Article>
             <Link to={`/article/${article.article_id}`} style={{ textDecoration: 'none' }}><ArticleTitle>{article.title}</ArticleTitle></Link>
