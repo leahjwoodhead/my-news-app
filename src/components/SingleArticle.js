@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { fetchArticleById, addVotesToArticle } from './api'
+import { fetchArticleById, deleteArticle } from './api'
 import { css } from "@emotion/core";
 import PacmanLoader from 'react-spinners/PacmanLoader'
 import ErrorMessage from './ErrorMessage'
 import styled from 'styled-components'
 import Comments from './Comments'
+import Voter from './Voter'
 
 const override = css`
   display: block;
@@ -21,10 +22,18 @@ const ArticleHolder = styled.article`
 `
 
 const ArticleTitle = styled.h1`
-    font-size: 3vw;
+    font-size: 2vw;
     color: grey;
+    
 `
-
+const ArticleBody = styled.p`
+    width: 60%;
+    padding: 50px;
+    font-size: 20px;
+    margin: auto;
+    font-weight: lighter;
+    font-family: 'Montserrat', sans-serif;;
+`
 
 class SingleArticle extends Component {
 
@@ -32,7 +41,8 @@ class SingleArticle extends Component {
         article: {},
         loading: true,
         hasError: false,
-        errorMessage: ''
+        errorMessage: '',
+        // deleted: false
     }
 
     componentDidMount() {
@@ -45,16 +55,15 @@ class SingleArticle extends Component {
         })
     }
 
-    addVote = (event) => {
-        const { article_id } = this.props
-        const inc = event.target.id
-        addVotesToArticle(article_id, inc).then(article => {
-            this.setState({article})
-        })
-    }
+    // deleteArticle = (id) => {
+    //     deleteArticle(id).then(() => {
+    //         console.log("HERE")
+    //         this.setState({deleted: true})
+    //     })
+    // }
 
     render() {
-        const { article, loading, hasError, errorMessage } = this.state
+        const { article, loading, hasError, errorMessage, deleted } = this.state
         const { article_id } = this.props
 
         if (loading) {
@@ -68,17 +77,18 @@ class SingleArticle extends Component {
             )
         } else if (hasError) {
             return <ErrorMessage errorMessage={errorMessage}/>
+        // } else if (deleted) {
+        //     <p>Article Has Been Deleted</p>
         } else {
             return (
                 <>
                 <ArticleHolder>
                     <ArticleTitle>{article.title.toUpperCase()}</ArticleTitle>
                     <p>Topic: {article.topic}</p>
-                    <p>{article.body}</p>
+                    <ArticleBody>{article.body}</ArticleBody>
                     <p>By {article.author}</p>
-                    <p>Votes: {article.votes}</p>
-                    <button id="up" onClick={this.addVote}>Yay</button>
-                    <button id="down" onClick={this.addVote}>Boo</button>
+                    <Voter votes={article.votes} id={article_id} type="article"/>
+                    {/* {(article.author === 'butter_bridge' ? <button onClick={() => this.deleteArticle(article.article_id)}>Delete Article</button> : <p></p>)} */}
                 </ArticleHolder>
                 <Comments id={article_id}/>
                 </>

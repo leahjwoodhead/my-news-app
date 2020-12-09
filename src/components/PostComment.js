@@ -20,7 +20,7 @@ class PostComment extends Component {
         event.preventDefault()
         const {id} = this.props
         const comment = {
-            username: 'butter_bridge',
+            username: 'cooljmessy',
             body: this.state.value
         }
         

@@ -11,6 +11,10 @@ const override = css`
   border-color: red;
 `;
 
+const TopicTitle = styled.h2`
+    font-size: 3vw;
+    color: orange;
+`
 
 class Articles extends Component {
     state = {
@@ -47,7 +51,10 @@ class Articles extends Component {
                 />
             )
         } else {
+            const { topic } = this.props
             return (
+                <>
+                {(topic ? <TopicTitle>{topic.slice(0, 1).toUpperCase() + topic.slice(1)}</TopicTitle> : <TopicTitle>All Articles</TopicTitle> )}
                 <ul className="Articles">
                     {this.state.articles.map(article => {
                         return (
@@ -55,6 +62,7 @@ class Articles extends Component {
                         )
                     })}
                 </ul> 
+                </>
             )     
         }
     }

@@ -47,7 +47,19 @@ export const addVotesToArticle = (id, inc) => {
     }
     if (inc === 'up') votes.inc_votes++
     if (inc === 'down') votes.inc_votes--
-    return ncNewsApi.patch(`articles/${id}`, votes).then(res => {
-        return res.data.article
-    })
+    return ncNewsApi.patch(`articles/${id}`, votes)
 }
+
+export const addVotesToComment = (id, inc) => {
+    const votes = {
+        inc_votes: 0
+    }
+    if (inc === 'up') votes.inc_votes++
+    if (inc === 'down') votes.inc_votes--
+    return ncNewsApi.patch(`comments/${id}`, votes)
+}
+
+// export const deleteArticle = (id) => {
+//     console.log("HERe")
+//     return ncNewsApi.delete(`articles/${id}`)
+// }
