@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {addArticle} from './api'
 import styled from 'styled-components'
-import {Link} from '@reach/router'
+import {Link, navigate} from '@reach/router'
 
 const ArticleInput = styled.textarea`
     width: 60%;
@@ -63,13 +63,20 @@ class PostArticle extends Component {
         })
 
     }
+
+    navToArticle = (id) => {
+        setTimeout(() => {
+            navigate(`/article/${id}`);}, 2000)
+        
+    }
+
     render() {
         const { posted, article_id } = this.state
         if (posted) {
             return (
                 <>
-                <p>Successful!</p>
-                <Link to={`/article/${article_id}`}><button>Go To Article</button></Link>
+                <p>Successful! Redirecting....</p>
+                {this.navToArticle(article_id)}
                 </>
             )
         } else {

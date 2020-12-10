@@ -16,9 +16,7 @@ const Article = styled.li`
 `
 const ArticleTitle = styled.h2`
     color: #DF3B57;
-    /* width: 80%; */
     border-radius: 5px;
-
     &:hover {
         color: pink;
     }

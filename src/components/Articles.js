@@ -23,7 +23,23 @@ const SectionTitle = styled.h3`
     text-transform: uppercase;
     color: #DF3B57;
 `
-
+const ScrollUl = styled.div`
+    /* background-color: lightgrey; */
+    width: 100%;
+    overflow-y: auto;
+    height: 40vw;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    border: 1px inset orange;
+    border-radius: 20px;
+    
+`
+const WriteArticleButton = styled.button`
+    color: #DF3B57;
+    margin: 4%;
+    font-size: 2vw;
+`
 
 
 class Articles extends Component {
@@ -38,7 +54,7 @@ class Articles extends Component {
         if (prevProps.topic !== this.props.topic) {
             const { topic } = this.props
             this.setState({loading: true}, () => {
-                fetchArticles(topic).then(articles => {
+                fetchArticles(topic, 100).then(articles => {
                     fetchArticles(topic, 4, "votes").then((popular) => {
                         const latest = articles.slice(0, 4)
                         this.setState({articles, loading: false, latest, popular})
@@ -50,7 +66,7 @@ class Articles extends Component {
 
     componentDidMount() {
         const { topic } = this.props
-        fetchArticles(topic).then(articles => {
+        fetchArticles(topic, 100).then(articles => {
             fetchArticles(topic, 4, "votes").then((popular) => {
                 const latest = articles.slice(0, 4)
                 this.setState({articles, loading: false, latest, popular})
@@ -92,13 +108,15 @@ class Articles extends Component {
                     </ul>
                 <SectionTitle>All</SectionTitle>
                 <ul className="Articles">
+                    <ScrollUl>
                     {this.state.articles.map(article => {
                         return (
                             <ArticleCard key={article.article_id} article={article}/>
                         )
                     })}
+                    </ScrollUl>
                 </ul> 
-                <Link to="/submit"><button>Write Article</button></Link>
+                <Link to="/submit"><WriteArticleButton>Write Article</WriteArticleButton></Link>
                 </>
             )     
         }

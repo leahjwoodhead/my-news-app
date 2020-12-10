@@ -6,7 +6,7 @@ import ErrorMessage from './ErrorMessage'
 import styled from 'styled-components'
 import Comments from './Comments'
 import Voter from './Voter'
-import {Link} from '@reach/router'
+import {Link, navigate} from '@reach/router'
 
 const override = css`
   display: block;
@@ -70,6 +70,12 @@ class SingleArticle extends Component {
         }
     }
 
+    navigateToHome = () => {
+        setTimeout(() => {
+            navigate('/')}, 2000)
+    
+    }
+
     render() {
         const { article, loading, hasError, errorMessage, deleted } = this.state
         const { article_id } = this.props
@@ -88,8 +94,8 @@ class SingleArticle extends Component {
         } else if (deleted) {
             return (
                 <>
-            <p>Article Has Been Deleted</p>
-            <Link to="/"><button>Home</button></Link>
+            <p>Article Has Been Deleted. Redirecting...</p>
+            {this.navigateToHome()}
             </>
             )
         } else {

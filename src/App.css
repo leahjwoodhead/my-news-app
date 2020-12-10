@@ -26,6 +26,7 @@ body {
   grid-area: page;
 }
 
+
 nav {
   grid-area: sidebar;
   display: grid;
