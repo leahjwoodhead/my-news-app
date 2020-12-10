@@ -19,21 +19,40 @@ class Comments extends Component {
 
     state = {
         comments: [],
-        displayedComments: [],
-        showAll: false
+        displaying: 'Latest'
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        const { id } = this.props
+        const {displaying} = this.state
+        if (prevState.displaying !== this.state.displaying) {
+           let sort_by = "created_at"
+           let limit = 4
+           let order = "asc"
+           if (displaying === 'All') limit = 100
+           if (displaying === 'Latest') order = "desc"
+           if (displaying === 'Oldest') order = "asc"
+           if (displaying === 'Most Popular') {
+               sort_by = "votes"
+               order = "desc"
+           }
+           if (displaying === 'Least Popular') sort_by = "votes"
+    
+           fetchCommentsById(id, limit, sort_by, order).then(comments => {
+            this.setState({comments})
+        })
+        }
+    }
 
     componentDidMount() {
         const { id } = this.props
-        fetchCommentsById(id).then(comments => {
-            let display = []
-            if (comments.length > 0) {
-                display = [comments[0]]
-            }
-            this.setState({comments, displayedComments: display
-            })
+        fetchCommentsById(id, 4, "created_at").then(comments => {
+            this.setState({comments})
         })
+    }
+
+    updateDisplay = (value) => {
+        this.setState({displaying: value})
     }
 
     addComment = (comment) => {
@@ -58,44 +77,21 @@ class Comments extends Component {
         })
     }
 
-    changeCommentDisplay = () => {
-        this.setState(currState => {
-            const newState = {showAll: !currState.showAll}
-            return newState
-        })
-    }
-
     render() {
         const { id } = this.props
-        const { comments, showAll, displayedComments } = this.state
-
-        if (showAll) {
+        const { comments } = this.state
             return   ( 
             <>
-             <button onClick={this.changeCommentDisplay}>Hide Comments</button> <p>Showing: {comments.length} of {comments.length}</p> 
-            <SortCommentsForm/>
-            <CommentsHolder>
-                {comments.map(comment => {
-                    return <CommentCard comment={comment} deleteComment={this.deleteComment}/>
-                })}
-            </CommentsHolder>
-            <PostComment id={id} addComment={this.addComment} />
+                <SortCommentsForm updateDisplay={this.updateDisplay}/>
+                <CommentsHolder>
+                    {comments.map(comment => {
+                        return <CommentCard comment={comment} deleteComment={this.deleteComment}/>
+                    })}
+                </CommentsHolder>
+                <PostComment id={id} addComment={this.addComment} />
             </>
             )
-        } else {
-            return (
-            <>
-            <button onClick={this.changeCommentDisplay}>Show All Comments</button> <p>Showing: {displayedComments.length} of {comments.length}</p>
-            <SortCommentsForm/>
-            <CommentsHolder>
-                {displayedComments.map(comment => {
-                    return <CommentCard comment={comment} deleteComment={this.deleteComment}/>
-                })}
-            </CommentsHolder>
-            <PostComment id={id} addComment={this.addComment} />
-            </>
-            );
-        }
+        
     }
 }
 

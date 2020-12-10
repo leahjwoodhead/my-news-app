@@ -24,6 +24,8 @@ const SectionTitle = styled.h3`
     color: #DF3B57;
 `
 
+
+
 class Articles extends Component {
     state = {
         articles: [],

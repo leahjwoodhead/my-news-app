@@ -6,6 +6,7 @@ import ErrorMessage from './ErrorMessage'
 import styled from 'styled-components'
 import Comments from './Comments'
 import Voter from './Voter'
+import {Link} from '@reach/router'
 
 const override = css`
   display: block;
@@ -42,7 +43,7 @@ class SingleArticle extends Component {
         loading: true,
         hasError: false,
         errorMessage: '',
-        // deleted: false
+        deleted: false
     }
 
     componentDidMount() {
@@ -55,12 +56,19 @@ class SingleArticle extends Component {
         })
     }
 
-    // deleteArticle = (id) => {
-    //     deleteArticle(id).then(() => {
-    //         console.log("HERE")
-    //         this.setState({deleted: true})
-    //     })
-    // }
+    deleteArticle = (id) => {
+        const answer = window.confirm("Delete Article?")
+        if (answer) {
+            deleteArticle(id).then(() => {
+                this.setState({  
+                    article: {},
+                    loading: false,
+                    hasError: false,
+                    errorMessage: '',
+                    deleted: true})
+            })
+        }
+    }
 
     render() {
         const { article, loading, hasError, errorMessage, deleted } = this.state
@@ -77,8 +85,13 @@ class SingleArticle extends Component {
             )
         } else if (hasError) {
             return <ErrorMessage errorMessage={errorMessage}/>
-        // } else if (deleted) {
-        //     <p>Article Has Been Deleted</p>
+        } else if (deleted) {
+            return (
+                <>
+            <p>Article Has Been Deleted</p>
+            <Link to="/"><button>Home</button></Link>
+            </>
+            )
         } else {
             return (
                 <>
@@ -88,7 +101,7 @@ class SingleArticle extends Component {
                     <ArticleBody>{article.body}</ArticleBody>
                     <p>By {article.author}</p>
                     <Voter votes={article.votes} id={article_id} type="article"/>
-                    {/* {(article.author === 'butter_bridge' ? <button onClick={() => this.deleteArticle(article.article_id)}>Delete Article</button> : <p></p>)} */}
+                    {(article.author === 'cooljmessy' ? <button onClick={() => this.deleteArticle(article.article_id)}>Delete Article</button> : <p></p>)}
                 </ArticleHolder>
                 <Comments id={article_id}/>
                 </>

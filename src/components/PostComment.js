@@ -50,7 +50,7 @@ class PostComment extends Component {
             <CommentFormHolder>
                 <form onSubmit={this.handleSubmit}>
                     <label>Comment: </label><br/>
-                    <CommentInput type="text" onChange={(event) => this.handleChange(event)} value={this.state.value} /><br/>
+                    <CommentInput required type="text" onChange={(event) => this.handleChange(event)} value={this.state.value} /><br/>
                     <input type="submit" value="Submit"/>
                 </form>
             </CommentFormHolder>

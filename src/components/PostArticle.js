@@ -1,7 +1,35 @@
 import React, { Component } from 'react';
 import {addArticle} from './api'
 import styled from 'styled-components'
+import {Link} from '@reach/router'
 
+const ArticleInput = styled.textarea`
+    width: 60%;
+    height: 20vw;
+    border-radius: 10px;
+`
+const ArticleSubmit = styled.input`
+    border: none;
+    font-size: 1vw;
+    margin: 20px;
+    border: 1px solid;
+    border-radius: 20px;
+    color: #DF3B57;
+
+    &:hover {
+        background-color: #DF3B57;
+        color: white;
+    }
+`
+
+const ArticleInfo = styled.div`
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    color: #DF3B57;
+`
 
 class PostArticle extends Component {
 
@@ -10,7 +38,8 @@ class PostArticle extends Component {
         textInput: "",
         topic: "",
         username: "cooljmessy",
-        posted: false
+        posted: false,
+        article_id: 0
     }
 
     handleChange = (event) => {
@@ -18,40 +47,47 @@ class PostArticle extends Component {
         this.setState({ [event.target.id]: value})
     }
 
-    // CANT ACCESS API!!
 
     handleSubmit = (event) => {
         event.preventDefault()
         const { titleInput, topic, textInput, username } = this.state
-        addArticle(titleInput, topic, textInput, username).then(() => {
+        addArticle(titleInput, topic, textInput, username).then((article) => {
+            const {article_id} = article
             this.setState({posted: true, 
             titleInput: "",
             textInput: "",
             topic: "",
-            username: "cooljmessy" })
+            username: "cooljmessy",
+            article_id
+        })
         })
 
     }
     render() {
-        const { posted } = this.state
+        const { posted, article_id } = this.state
         if (posted) {
             return (
+                <>
                 <p>Successful!</p>
+                <Link to={`/article/${article_id}`}><button>Go To Article</button></Link>
+                </>
             )
         } else {
             return (
                 <form onSubmit={this.handleSubmit}>
-                    <p>Title</p>
-                    <input id="titleInput" value={this.state.titleInput} onChange={(event) => this.handleChange(event)}/>
-                    <p>Topic</p>
-                    <select id="topic" onChange={(event) => this.handleChange(event)}>
-                        <option>cooking</option>
-                        <option>coding</option>
-                        <option>football</option>
-                    </select>
-                    <p>Write your article here:</p>
-                    <input id="textInput" value={this.state.textInput} onChange={(event) => this.handleChange(event)}/>
-                    <input type="submit" value="post"/>
+                    <ArticleInfo>
+                        <p>Title: </p>
+                        <input required id="titleInput" value={this.state.titleInput} onChange={(event) => this.handleChange(event)}/>
+                        <p>Topic: </p>
+                        <select required id="topic" onChange={(event) => this.handleChange(event)}>
+                            <option value="" disabled selected>Select Topic</option>
+                            <option>cooking</option>
+                            <option>coding</option>
+                            <option>football</option>
+                        </select>
+                    </ArticleInfo>
+                    <ArticleInput required id="textInput" placeholder="Write your article here..."value={this.state.textInput} onChange={(event) => this.handleChange(event)}/><br/>
+                    <ArticleSubmit type="submit" value="Submit"/>
                 </form>
             );
         }

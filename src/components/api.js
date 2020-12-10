@@ -27,10 +27,12 @@ export const fetchArticleById = (id) => {
     })
 }
 
-export const fetchCommentsById = (id, sort_by) => {
+export const fetchCommentsById = (id, limit, sort_by, order) => {
     return ncNewsApi.get(`/articles/${id}/comments`, {
         params: {
-            sort_by: sort_by
+            limit: limit,
+            sort_by: sort_by,
+            order: order
         }
     }).then((res) => {
         return res.data.comments
@@ -65,10 +67,11 @@ export const addVotesToComment = (id, inc) => {
     return ncNewsApi.patch(`comments/${id}`, votes)
 }
 
-// export const deleteArticle = (id) => {
-//     console.log("HERe")
-//     return ncNewsApi.delete(`articles/${id}`)
-// }
+export const deleteArticle = (id) => {
+    return ncNewsApi.delete(`articles/${id}`).then(() => {
+        console.log("DELETED")
+    })
+}
 
 export const addArticle = (title, topic, text, username) => {
     const formattedArticle = {
@@ -78,5 +81,7 @@ export const addArticle = (title, topic, text, username) => {
         author: username
     }
     console.log(formattedArticle)
-    return ncNewsApi.post('articles', formattedArticle) 
+    return ncNewsApi.post('articles', formattedArticle).then((res) => {
+        return res.data.article
+    }) 
 }

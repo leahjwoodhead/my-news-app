@@ -25,7 +25,7 @@ class Voter extends Component {
         const { id, type } = this.props
         const inc = event.target.id
         if (type === "article") addVotesToArticle(id, inc)
-        if (type === "comment") addVotesToComment(id, inc)
+        if (type === "comments") addVotesToComment(id, inc)
         this.setState(currState => {    
             let newState = {...currState}
             if (inc === "up") { 
