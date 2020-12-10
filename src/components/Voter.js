@@ -1,5 +1,18 @@
 import React, { Component } from 'react';
 import { addVotesToArticle, addVotesToComment } from './api'
+import styled from 'styled-components'
+
+const VoteButton = styled.button`
+    border: none;
+    background-color: white;
+    transition: transform .2s;
+    margin: 5px;
+
+    &:hover {
+        transform: scale(2); 
+        background-color: orange;
+    }
+`
 
 class Voter extends Component {
 
@@ -29,8 +42,8 @@ class Voter extends Component {
         return (
             <div>
                 <p>Votes: {this.props.votes + this.state.votes}</p>
-                <button id="up" onClick={this.addVote}>Yay</button>
-                <button id="down" onClick={this.addVote}>Boo</button>
+                <VoteButton id="up" onClick={this.addVote}>💯</VoteButton>
+                <VoteButton id="down" onClick={this.addVote}>🤢</VoteButton>
             </div>
         );
     }

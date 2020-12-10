@@ -4,6 +4,7 @@ import {fetchArticles} from './api'
 import ArticleCard from './ArticleCard'
 import { css } from "@emotion/core";
 import PacmanLoader from 'react-spinners/PacmanLoader'
+import {Link} from '@reach/router'
 
 const override = css`
   display: block;
@@ -95,6 +96,7 @@ class Articles extends Component {
                         )
                     })}
                 </ul> 
+                <Link to="/submit"><button>Write Article</button></Link>
                 </>
             )     
         }

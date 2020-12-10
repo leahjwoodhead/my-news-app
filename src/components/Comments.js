@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { fetchCommentsById, deleteCommentById } from './api'
 import CommentCard from './CommentCard'
 import PostComment from './PostComment';
+import SortCommentsForm from './SortCommentsForm'
 
 
 const CommentsHolder = styled.div`
@@ -21,6 +22,7 @@ class Comments extends Component {
         displayedComments: [],
         showAll: false
     }
+
 
     componentDidMount() {
         const { id } = this.props
@@ -71,6 +73,7 @@ class Comments extends Component {
             return   ( 
             <>
              <button onClick={this.changeCommentDisplay}>Hide Comments</button> <p>Showing: {comments.length} of {comments.length}</p> 
+            <SortCommentsForm/>
             <CommentsHolder>
                 {comments.map(comment => {
                     return <CommentCard comment={comment} deleteComment={this.deleteComment}/>
@@ -83,6 +86,7 @@ class Comments extends Component {
             return (
             <>
             <button onClick={this.changeCommentDisplay}>Show All Comments</button> <p>Showing: {displayedComments.length} of {comments.length}</p>
+            <SortCommentsForm/>
             <CommentsHolder>
                 {displayedComments.map(comment => {
                     return <CommentCard comment={comment} deleteComment={this.deleteComment}/>

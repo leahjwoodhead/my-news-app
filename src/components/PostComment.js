@@ -8,7 +8,17 @@ const CommentFormHolder = styled.div`
     margin: 3vw 10vw;
     height: 100px;
     text-align: left;
+    padding-left: 10px;
     background-color: white;
+`
+
+const CommentInput = styled.input`
+    width: 95%;
+    border: none;
+    border-radius: 5px;
+    background-color: lightgrey;
+    margin-top: 10px;
+    margin-bottom: 10px;
 `
 class PostComment extends Component {
 
@@ -40,7 +50,7 @@ class PostComment extends Component {
             <CommentFormHolder>
                 <form onSubmit={this.handleSubmit}>
                     <label>Comment: </label><br/>
-                    <input type="text" onChange={(event) => this.handleChange(event)} value={this.state.value} /><br/>
+                    <CommentInput type="text" onChange={(event) => this.handleChange(event)} value={this.state.value} /><br/>
                     <input type="submit" value="Submit"/>
                 </form>
             </CommentFormHolder>

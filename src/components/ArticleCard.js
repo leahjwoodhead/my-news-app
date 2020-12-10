@@ -37,7 +37,7 @@ const ArticleCard = (props) => {
             <p>📜{article.topic.slice(0, 1).toUpperCase() + article.topic.slice(1)}</p>
             <p>Written by {article.author}</p>
             <br></br>
-            <ArticleDate>{article.created_at.slice(0, 10)}</ArticleDate><p>Votes: {article.votes}</p>
+            <ArticleDate>🕗 {article.created_at.slice(0, 10)}</ArticleDate><p>Votes: {article.votes}</p>
         </Article>
     );
 };

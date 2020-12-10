@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link } from '@reach/router'
 import { fetchArticles, fetchTopics } from './api'
 
-const NavButton = styled.button`
+export const NavButton = styled.button`
     border: none;
     font-size: 2vw;
     width: 100%;
