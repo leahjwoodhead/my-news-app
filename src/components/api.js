@@ -10,12 +10,14 @@ export const fetchTopics = () => {
     })
 }
 
-export const fetchArticles = (topic, limit, sort_by) => {
+export const fetchArticles = (topic, limit, sort_by, order, p) => {
     return ncNewsApi.get("/articles",  {
         params: {
             topic: topic,
             limit: limit,
-            sort_by: sort_by
+            sort_by: sort_by,
+            order: order,
+            p: p
     }}).then((res) => {
         return res.data.articles
     })
