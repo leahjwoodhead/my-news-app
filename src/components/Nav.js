@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import { Link } from '@reach/router'
-import { fetchArticles, fetchTopics } from './api'
+import { fetchTopics } from './api'
 
 const NavBar = styled.nav`
     background-color: orange;

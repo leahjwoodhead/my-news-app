@@ -20,8 +20,17 @@ const TopicTitle = styled.h2`
 
 const WriteArticleButton = styled.button`
     color: #F95738;
-    margin: 4%;
-    font-size: 2vw;
+    margin: 5%;
+    margin-top: 0;
+    font-size: 50px;
+    border: none;
+    background-color: white;
+`
+
+const PageButton = styled.button`
+    color: #F95738;
+    font-size: 100px;
+    border: none;
 `
 class Articles extends Component {
 
@@ -114,7 +123,7 @@ class Articles extends Component {
             const {articles, pages, p} = this.state
             return (
             <>
-              {(topic ? <TopicTitle>{topic.slice(0, 1).toUpperCase() + topic.slice(1)}</TopicTitle> : <TopicTitle>All Articles</TopicTitle> )}  
+              {(topic ? <TopicTitle>{topic.toUpperCase()}</TopicTitle> : <TopicTitle>ALL ARTICLES</TopicTitle> )}  
               <SortArticles sortArticles={this.sortArticles}/>
               <ul className="Articles">
                     {articles.map(article => {
@@ -123,9 +132,9 @@ class Articles extends Component {
                         )
                     })}
                 </ul>
-                {(p < pages) ? <button id="next" onClick={(event) => this.handleClick(event)}>{p + 1}➡</button> : null}<br/>
-                {(p > 1) ? <button id="previous" onClick={(event) => this.handleClick(event)}>{p - 1}⬅</button> : null}
-                <Link to="/submit"><WriteArticleButton>Write Article</WriteArticleButton></Link>
+                {(p > 1) ? <PageButton id="previous" onClick={(event) => this.handleClick(event)}>⬅</PageButton> : null}
+                {(p < pages) ? <PageButton id="next" onClick={(event) => this.handleClick(event)}>➡</PageButton> : null}<br></br>
+                <p>Want to submit an article? Click <Link to="/submit"><WriteArticleButton>here</WriteArticleButton></Link> </p>
             </>
             );
         }

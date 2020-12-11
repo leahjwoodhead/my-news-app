@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Title = styled.header`
     font-size: 5vw;
-    color: #F95738;
+    color: white;
     background-color: #353A47;
     display: flex;
     justify-content: center;
@@ -18,8 +18,8 @@ const Title = styled.header`
     @keyframes backgroundBlinker{
         0%   {background-color:red; left:0px; top:0px;}
         25%  {background-color:yellow; left:200px; top:0px;}
-        50%  {background-color:blue; left:200px; top:200px;}
-        75%  {background-color:green; left:0px; top:200px;}
+        50%  {background-color:orange; left:200px; top:200px;}
+        75%  {background-color:yellow; left:0px; top:200px;}
         100% {background-color:red; left:0px; top:0px;}
     }
 

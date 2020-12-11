@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {addArticle} from './api'
 import styled from 'styled-components'
-import {Link, navigate} from '@reach/router'
+import { navigate} from '@reach/router'
 
 const ArticleInput = styled.textarea`
     width: 60%;

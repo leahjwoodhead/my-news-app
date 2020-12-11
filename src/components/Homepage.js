@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { fetchArticles } from './api';
 import ArticleCard from './ArticleCard';
-import PostComment from './PostComment';
 import { css } from "@emotion/core";
 import PacmanLoader from 'react-spinners/PacmanLoader'
 import styled from 'styled-components'
@@ -49,14 +48,14 @@ class Homepage extends Component {
         } else {
             return (
             <>
-            <SectionTitle>Popular</SectionTitle>
+            <SectionTitle>POPULAR</SectionTitle>
                 <ul className="Articles">
                     {popular.map(article => {
                         return (
                             <ArticleCard key={article.article_id} article={article}/>
                         )})} 
                 </ul>  
-                <SectionTitle>Latest</SectionTitle>
+                <SectionTitle>LATEST</SectionTitle>
                 <ul className="Articles">
                     {latest.map(article => {
                         return (

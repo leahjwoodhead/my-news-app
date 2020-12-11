@@ -30,7 +30,7 @@ const ArticleCard = (props) => {
     return (
         <Article type={type}>
             <Link to={`/article/${article.article_id}`} style={{ textDecoration: 'none' }}><ArticleTitle>{article.title}</ArticleTitle></Link>
-            <p>📜{article.topic.slice(0, 1).toUpperCase() + article.topic.slice(1)} <br/>Written by {article.author}</p>
+            <p>📜{article.topic.slice(0, 1).toUpperCase() + article.topic.slice(1)} <br/>Written by <Link to={`/users/${article.author}`}>{article.author}</Link></p>
             <ArticleDate>🕗 {article.created_at.slice(0, 10)}</ArticleDate>
             <p>Votes: {article.votes}</p>
         </Article>

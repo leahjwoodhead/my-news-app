@@ -4,21 +4,34 @@ import { postComment } from './api'
 
 const CommentFormHolder = styled.div`
     border: 2px solid orange;
-    border-radius: 10px;
     margin: 3vw 10vw;
-    height: 100px;
+    height: 150px;
     text-align: left;
     padding-left: 10px;
     background-color: white;
+    margin-bottom: 5vw;
+    margin-top: 0;
 `
 
-const CommentInput = styled.input`
-    width: 95%;
+const SubmitButton = styled.input`
     border: none;
-    border-radius: 5px;
-    background-color: lightgrey;
+    font-size: 15px;
+    color: orange;
+    background-color: white;
+
+    &:hover {
+        background-color: orange;
+        color: black;
+    }
+`
+
+const CommentInput = styled.textarea`
+    width: 99%;
+    border: none;
+    background-color: #EEEEEE;
+    height: 100px;
+    border: 1px solid lightgrey;
     margin-top: 10px;
-    margin-bottom: 10px;
 `
 class PostComment extends Component {
 
@@ -49,9 +62,8 @@ class PostComment extends Component {
         return (
             <CommentFormHolder>
                 <form onSubmit={this.handleSubmit}>
-                    <label>Comment: </label><br/>
-                    <CommentInput required type="text" onChange={(event) => this.handleChange(event)} value={this.state.value} /><br/>
-                    <input type="submit" value="Submit"/>
+                    <CommentInput placeholder="Write your comment here..."required type="text" onChange={(event) => this.handleChange(event)} value={this.state.value} /><br/>
+                    <SubmitButton type="submit" value="Submit"/>
                 </form>
             </CommentFormHolder>
         );

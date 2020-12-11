@@ -6,7 +6,7 @@ import ErrorMessage from './ErrorMessage'
 import styled from 'styled-components'
 import Comments from './Comments'
 import Voter from './Voter'
-import {Link, navigate} from '@reach/router'
+import { navigate} from '@reach/router'
 
 const override = css`
   display: block;
@@ -16,7 +16,6 @@ const override = css`
 
 const ArticleHolder = styled.article`
     border: 2px solid orange;
-    border-radius: 10px;
     margin: 3vw 10vw;
     height: auto;
     background-color: white;
@@ -34,6 +33,18 @@ const ArticleBody = styled.p`
     margin: auto;
     font-weight: lighter;
     font-family: 'Montserrat', sans-serif;;
+`
+
+const DeleteArticle = styled.button`
+    border: none;
+    font-size: 15px;
+    color: orange;
+    background-color: white;
+
+    &:hover {
+        background-color: orange;
+        color: black;
+    }
 `
 
 class SingleArticle extends Component {
@@ -107,7 +118,7 @@ class SingleArticle extends Component {
                     <ArticleBody>{article.body}</ArticleBody>
                     <p>By {article.author}</p>
                     <Voter votes={article.votes} id={article_id} type="article"/>
-                    {(article.author === 'cooljmessy' ? <button onClick={() => this.deleteArticle(article.article_id)}>Delete Article</button> : <p></p>)}
+                    {(article.author === 'cooljmessy' ? <DeleteArticle onClick={() => this.deleteArticle(article.article_id)}>Delete Article</DeleteArticle> : <p></p>)}
                 </ArticleHolder>
                 <Comments id={article_id}/>
                 </>

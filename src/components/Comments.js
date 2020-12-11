@@ -8,7 +8,6 @@ import SortCommentsForm from './SortCommentsForm'
 
 const CommentsHolder = styled.div`
     border: 2px solid orange;
-    border-radius: 10px;
     margin: 3vw 10vw;
     height: ${props => {
         if (props.expand) return 'auto' 
@@ -16,6 +15,7 @@ const CommentsHolder = styled.div`
         else return '20vw'}};
     background-color: white;
     overflow-y: scroll;
+    margin-bottom: 0;
 
 `
 
@@ -94,12 +94,12 @@ class Comments extends Component {
             return   ( 
             <>
                 <SortCommentsForm updateDisplay={this.updateDisplay}/>
+                {(expand ? <button id="hide" onClick={(event) => this.expandComments(event)}>Hide</button> :  <button id="expand" onClick={(event) => this.expandComments(event)}>Expand</button>)}
                 <CommentsHolder expand={expand} length={length}>
                     {(length > 0 ? comments.map(comment => {
                         return <CommentCard comment={comment} deleteComment={this.deleteComment}/>
                     }) : <p>This article does not have any comments</p>)}
                 </CommentsHolder>
-                {(expand ? <button id="hide" onClick={(event) => this.expandComments(event)}>Hide</button> :  <button id="expand" onClick={(event) => this.expandComments(event)}>Expand</button>)}
                 <PostComment id={id} addComment={this.addComment} />
             </>
             )

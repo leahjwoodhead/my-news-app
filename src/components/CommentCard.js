@@ -4,18 +4,18 @@ import Voter from './Voter'
 
 const SingleComment = styled.div`
     border: 1px solid orange;
-    font-size: 10px;
+    font-size: 15px;
     text-align: left;
     padding-left: 5px;
 `
 
 const CommentBody = styled.p`
-    font-size: 15px;
+    font-size: 20px;
 `
 
 const DeleteComment = styled.button`
     border: none;
-    font-size: 0.5vw;
+    font-size: 15px;
     color: orange;
     background-color: white;
 
