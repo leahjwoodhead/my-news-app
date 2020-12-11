@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components'
 
 const AppFooter = styled.footer`
-    background-color: #F2A359;
+    background-color: orange;
     width: 100%;
     grid-area: footer;
     position: fixed;
     bottom: 0;
     text-align: left;
-    color: white;
+    color: #F95738;
     padding-left: 10px;
 `
 

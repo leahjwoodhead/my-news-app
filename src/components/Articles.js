@@ -15,33 +15,14 @@ const override = css`
 
 const TopicTitle = styled.h2`
     font-size: 3vw;
-    color: orange;
+    color: #F95738;
 `
 
-const SectionTitle = styled.h3`
-    color: pink;
-    font-size: 2vw;
-    text-transform: uppercase;
-    color: #DF3B57;
-`
-const ScrollUl = styled.div`
-    /* background-color: lightgrey; */
-    width: 100%;
-    overflow-y: auto;
-    height: 40vw;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    border-radius: 20px;
-    
-`
 const WriteArticleButton = styled.button`
-    color: #DF3B57;
+    color: #F95738;
     margin: 4%;
     font-size: 2vw;
-
 `
-
 class Articles extends Component {
 
     state = {
@@ -50,7 +31,8 @@ class Articles extends Component {
         loading: true,
         limit: 10,
         sort_by: "created_at",
-        order: "desc"
+        order: "desc",
+        pages: 1
     }
 
     sortArticles = (sort) => {
@@ -97,7 +79,10 @@ class Articles extends Component {
                 return newState
             })
             fetchArticles(topic, limit, sort_by, order, p).then((articles) => {
-                this.setState({articles, loading: false})
+                fetchArticles(topic, 100).then(res => {
+                    const pages = Math.ceil(res.length / 10)
+                    this.setState({articles, loading: false, pages})
+                }) 
             })
         }
     }
@@ -106,7 +91,11 @@ class Articles extends Component {
         const { topic } = this.props
         const { limit, sort_by, order, p } = this.state
         fetchArticles(topic, limit, sort_by, order, p).then((articles) => {
-            this.setState({articles, loading: false})
+            fetchArticles(topic, 100).then(res => {
+                const pages = Math.ceil(res.length / 10)
+                console.log(pages)
+                this.setState({articles, loading: false, pages})
+            }) 
         })
     }
 
@@ -116,13 +105,13 @@ class Articles extends Component {
                 <PacmanLoader
                     css={override}
                     size={100}
-                    color={"#DF3B57"}
+                    color={"#F95738"}
                     loading={this.state.loading}
                 />
             )
         } else {
             const {topic} = this.props
-            const {articles} = this.state
+            const {articles, pages, p} = this.state
             return (
             <>
               {(topic ? <TopicTitle>{topic.slice(0, 1).toUpperCase() + topic.slice(1)}</TopicTitle> : <TopicTitle>All Articles</TopicTitle> )}  
@@ -134,8 +123,8 @@ class Articles extends Component {
                         )
                     })}
                 </ul>
-                <button id="next" onClick={(event) => this.handleClick(event)}>Next Page</button> 
-                <button id="previous" onClick={(event) => this.handleClick(event)}>Previous Page</button> 
+                {(p < pages) ? <button id="next" onClick={(event) => this.handleClick(event)}>{p + 1}➡</button> : null}<br/>
+                {(p > 1) ? <button id="previous" onClick={(event) => this.handleClick(event)}>{p - 1}⬅</button> : null}
                 <Link to="/submit"><WriteArticleButton>Write Article</WriteArticleButton></Link>
             </>
             );

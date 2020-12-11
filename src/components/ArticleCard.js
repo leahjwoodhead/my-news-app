@@ -3,39 +3,36 @@ import styled from 'styled-components'
 import {Link} from '@reach/router'
 
 const Article = styled.li`
-    border-radius: 30px;
-    border: 1px solid orange;
     width: 40%;
     height: 250px;
+    font-size: 20px;
     margin: 10px;
-    color: #DF3B57;
+    color: #F95738;
     list-style: none;
     background-color: white;
     text-align: left;
     padding-left: 30px;
 `
 const ArticleTitle = styled.h2`
-    color: #DF3B57;
-    border-radius: 5px;
+    color: #F95738;
     &:hover {
         color: pink;
     }
 `
 
 const ArticleDate = styled.p`
-    font-size: 10px;
+    font-size: 15px;
     color: black;
 `
 
 const ArticleCard = (props) => {
-    const { article } = props
+    const { article, type } = props
     return (
-        <Article>
+        <Article type={type}>
             <Link to={`/article/${article.article_id}`} style={{ textDecoration: 'none' }}><ArticleTitle>{article.title}</ArticleTitle></Link>
-            <p>📜{article.topic.slice(0, 1).toUpperCase() + article.topic.slice(1)}</p>
-            <p>Written by {article.author}</p>
-            <br></br>
-            <ArticleDate>🕗 {article.created_at.slice(0, 10)}</ArticleDate><p>Votes: {article.votes}</p>
+            <p>📜{article.topic.slice(0, 1).toUpperCase() + article.topic.slice(1)} <br/>Written by {article.author}</p>
+            <ArticleDate>🕗 {article.created_at.slice(0, 10)}</ArticleDate>
+            <p>Votes: {article.votes}</p>
         </Article>
     );
 };

@@ -8,6 +8,7 @@ import { Router } from '@reach/router'
 import ErrorMessage from './components/ErrorMessage';
 import Footer from './components/Footer'
 import PostArticle from './components/PostArticle'
+import Homepage from './components/Homepage';
 
 const PageContainer = styled.div`
   height: auto;
@@ -19,7 +20,8 @@ function App() {
       <Header/>
       <Navigation/>
       <Router>
-        <Articles path="/"/>
+        <Homepage path="/"/>
+        <Articles path="/articles"/>
         <Articles path="/articles/:topic"/>
         <SingleArticle path="/article/:article_id"/>
         <PostArticle path="/submit"/>

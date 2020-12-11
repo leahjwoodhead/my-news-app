@@ -3,16 +3,30 @@ import styled from 'styled-components'
 import { Link } from '@reach/router'
 import { fetchArticles, fetchTopics } from './api'
 
+const NavBar = styled.nav`
+    background-color: orange;
+    color: pink;
+    font-size: 1vw;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+`
+
 export const NavButton = styled.button`
     border: none;
-    font-size: 2vw;
-    width: 100%;
-    color: #DF3B57;
-    height: 150px;
-    &:hover {
-        background-color: pink;
-        color:white;
+    height: 50px;
+    background-color: orange;
+    color: #F95738;
+    padding-left: 20px;
+    padding-right: 20px;
 
+    @media screen and (max-width: 600px) {
+        font-size: 5px;
+    }
+    &:hover {
+        background-color: #F95738;
+        color:white;
     }
 `
 
@@ -36,14 +50,15 @@ class Nav extends Component {
             )
         } else {
             return (
-                <nav>
+                <NavBar>                  
                     <Link to="/"><NavButton>HOME</NavButton></Link>
+                    <Link to="/articles"><NavButton>ALL</NavButton></Link>
                     {this.state.topics.map(topic => {
                         return (
                             <Link to={`/articles/${topic.slug}`} key={topic.slug}><NavButton slug={topic.slug
                             }>{topic.slug.toUpperCase()}</NavButton></Link>
                         )})}
-                </nav>
+                </NavBar>
             ) 
         }
     }

@@ -13,9 +13,8 @@ const ArticleSubmit = styled.input`
     font-size: 1vw;
     margin: 20px;
     border: 1px solid;
-    border-radius: 20px;
     color: #DF3B57;
-
+    margin-bottom: 5vw;
     &:hover {
         background-color: #DF3B57;
         color: white;

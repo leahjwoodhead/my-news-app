@@ -3,13 +3,17 @@ import styled from 'styled-components'
 
 const Title = styled.header`
     font-size: 5vw;
-    color: #DF3B57;
-    background-color: #F2A359;
+    color: #F95738;
+    background-color: #353A47;
     display: flex;
-    padding-left: 5vw;
+    justify-content: center;
     align-items: center;
     grid-area: header;
-    animation: backgroundBlinker 10s linear;
+    animation: backgroundBlinker 10s linear 0s infinite;
+
+    @media screen and (max-width: 600px) {
+       height: 150px; 
+    }
 
     @keyframes backgroundBlinker{
         0%   {background-color:red; left:0px; top:0px;}
