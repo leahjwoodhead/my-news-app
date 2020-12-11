@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {fetchArticles } from './api'
+import {fetchArticles, fetchUsers } from './api'
 import ArticleCard from './ArticleCard'
 import { css } from "@emotion/core";
 import PacmanLoader from 'react-spinners/PacmanLoader'
+import {navigate } from '@reach/router'
 
 const override = css`
   display: block;
@@ -16,7 +17,13 @@ class ArticlesByUser extends Component {
         username: "",
         articles: [],
         loading: true,
-        total: 0
+        total: 0,
+        validUsers: []
+    }
+
+    redirect = () => {
+        setTimeout(() => {
+            navigate('/')}, 2000)
     }
 
     componentDidMount() {
@@ -24,12 +31,14 @@ class ArticlesByUser extends Component {
         fetchArticles(undefined, 100).then((articles) => {
             const articlesByUser = articles.filter(article => article.author === username)
             const total = articlesByUser.length
-            this.setState({articles: articlesByUser, loading: false, total, username})
-
+            fetchUsers().then(users => {
+                const validUsers = users.map(user => user.username)
+                this.setState({articles: articlesByUser, loading: false, total, username, validUsers})
+            })
         })
     }
     render() {
-        const { loading, articles, username, total } = this.state
+        const { loading, articles, username, total, validUsers } = this.state
         if (loading) {
             return (
                 <PacmanLoader
@@ -39,8 +48,15 @@ class ArticlesByUser extends Component {
                   loading={this.state.loading}
                 />
             )
+        } else if (!validUsers.includes(username)) {
+            console.log(validUsers)
+            return (
+                <>
+                <p>User Not Found. Redirecting...</p>
+                {this.redirect()}
+                </>
+            )  
         } else {
-            console.log(articles)
             return (
                 <div>
                     <h2>{username}'s Articles</h2>

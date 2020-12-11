@@ -14,10 +14,16 @@ import ArticlesByUser from './components/ArticlesByUser';
 const PageContainer = styled.div`
   height: auto;
 `
+const User = styled.p`
+  text-align: right;
+  padding-right: 5px;
+  color: #F95738;
+`
 
 function App() {
   return (
     <PageContainer className="App">
+      <User>Logged in as cooljmessy</User>
       <Header/>
       <Navigation/>
       <Router>

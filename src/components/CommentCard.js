@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import React, { Component } from 'react';
 import Voter from './Voter'
+import {Link} from '@reach/router'
 
 const SingleComment = styled.div`
     border: 1px solid orange;
@@ -37,7 +38,7 @@ class CommentCard extends Component {
         return (
             <SingleComment key={comment.comment_id}>
                 <CommentBody>{comment.body}</CommentBody>
-                <p>{comment.author} @ {comment.created_at.slice(11, 16)} {comment.created_at.slice(0, 10)} </p>
+                <p><Link to={`/users/${comment.author}`}>{comment.author}</Link> @ {comment.created_at.slice(11, 16)} {comment.created_at.slice(0, 10)} </p>
                 <Voter id={comment.comment_id} votes={comment.votes} type="comments"/>
                 {(comment.author === 'cooljmessy' ? <DeleteComment onClick={() => this.props.deleteComment(comment.comment_id)}>Delete Comment</DeleteComment> : <p></p>)}
             </SingleComment>

@@ -6,7 +6,7 @@ import ErrorMessage from './ErrorMessage'
 import styled from 'styled-components'
 import Comments from './Comments'
 import Voter from './Voter'
-import { navigate} from '@reach/router'
+import { Link, navigate} from '@reach/router'
 
 const override = css`
   display: block;
@@ -116,7 +116,7 @@ class SingleArticle extends Component {
                     <ArticleTitle>{article.title.toUpperCase()}</ArticleTitle>
                     <p>Topic: {article.topic}</p>
                     <ArticleBody>{article.body}</ArticleBody>
-                    <p>By {article.author}</p>
+                    <p>By <Link to={`/users/${article.author}`}>{article.author}</Link></p>
                     <Voter votes={article.votes} id={article_id} type="article"/>
                     {(article.author === 'cooljmessy' ? <DeleteArticle onClick={() => this.deleteArticle(article.article_id)}>Delete Article</DeleteArticle> : <p></p>)}
                 </ArticleHolder>

@@ -23,6 +23,13 @@ export const fetchArticles = (topic, limit, sort_by, order, p) => {
     })
 }
 
+export const fetchUsers = () => {
+    return ncNewsApi.get(`/users`).then((res) => {
+        return res.data.users
+    })
+}
+
+
 export const fetchArticleById = (id) => {
     return ncNewsApi.get(`/articles/${id}`).then((res) => {
         return res.data.article
