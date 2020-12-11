@@ -10,8 +10,12 @@ const CommentsHolder = styled.div`
     border: 2px solid orange;
     border-radius: 10px;
     margin: 3vw 10vw;
-    height: auto;
+    height: ${props => {
+        if (props.expand) return 'auto' 
+        else if (props.length < 4) return 'auto'
+        else return '20vw'}};
     background-color: white;
+    overflow-y: scroll;
 
 `
 
@@ -19,7 +23,9 @@ class Comments extends Component {
 
     state = {
         comments: [],
-        displaying: 'Latest'
+        length: 0,
+        displaying: 'Latest',
+        expand: false
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -27,9 +33,8 @@ class Comments extends Component {
         const {displaying} = this.state
         if (prevState.displaying !== this.state.displaying) {
            let sort_by = "created_at"
-           let limit = 4
+           let limit = 100
            let order = "asc"
-           if (displaying === 'All') limit = 100
            if (displaying === 'Latest') order = "desc"
            if (displaying === 'Oldest') order = "asc"
            if (displaying === 'Most Popular') {
@@ -44,10 +49,17 @@ class Comments extends Component {
         }
     }
 
+    expandComments = (event) => {
+        const {id} = event.target
+        if (id === "expand") this.setState({expand: true})
+        else if (id === "hide") this.setState({expand: false})
+        
+    }
+
     componentDidMount() {
         const { id } = this.props
-        fetchCommentsById(id, 4, "created_at").then(comments => {
-            this.setState({comments})
+        fetchCommentsById(id, 100, "created_at").then(comments => {
+            this.setState({comments, length: comments.length})
         })
     }
 
@@ -57,8 +69,7 @@ class Comments extends Component {
 
     addComment = (comment) => {
         this.setState(currState => {
-            let display = [comment]
-            const newState = {comments: [comment, ...currState.comments], displayedComments: display}
+            const newState = {comments: [comment, ...currState.comments], length: currState.comments.length + 1}
             return newState
         })
     }
@@ -79,15 +90,16 @@ class Comments extends Component {
 
     render() {
         const { id } = this.props
-        const { comments } = this.state
+        const { comments, expand, length } = this.state
             return   ( 
             <>
                 <SortCommentsForm updateDisplay={this.updateDisplay}/>
-                <CommentsHolder>
-                    {comments.map(comment => {
+                <CommentsHolder expand={expand} length={length}>
+                    {(length > 0 ? comments.map(comment => {
                         return <CommentCard comment={comment} deleteComment={this.deleteComment}/>
-                    })}
+                    }) : <p>This article does not have any comments</p>)}
                 </CommentsHolder>
+                {(expand ? <button id="hide" onClick={(event) => this.expandComments(event)}>Hide</button> :  <button id="expand" onClick={(event) => this.expandComments(event)}>Expand</button>)}
                 <PostComment id={id} addComment={this.addComment} />
             </>
             )

@@ -18,7 +18,6 @@ class SortCommentsForm extends Component {
                 <option>Older</option>
                 <option>Most Popular</option>
                 <option>Least Popular</option>
-                <option>All</option>
              </select>
         );
     }
