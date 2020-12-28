@@ -1,40 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
-
-
-.App {
-  text-align: center;
-  font-family: 'Jura', sans-serif;
-  display: grid;
-  grid-template-rows: 300px 50px auto 50px;
-  grid-template-columns: 100%;
-  grid-template-areas: 
-   'header'
-   'nav'
-   'page'
-   'footer';
-  margin-bottom: 5vw;
-  width: 100%;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;400;500&display=swap');
 
 body {
   margin: 0;
-  background-color: #EEEEEE;
-}
-
-.Articles {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  grid-area: page;
-  margin-bottom: 5vw;
-}
-
-
-nav {
-  grid-area: nav;
-  display: grid;
-  text-align: center;
-  grid-template-columns: 120px 120px 120px 120px 120px;
+  background-color: white;
+  font-family: 'Roboto Slab', serif;
 }
 

@@ -6,6 +6,7 @@ import { css } from "@emotion/core";
 import PacmanLoader from 'react-spinners/PacmanLoader'
 import { Link } from '@reach/router'
 import SortArticles from './SortArticles';
+import { ArticlesContainer, ArticleList } from '../styles.js'
 
 const override = css`
   display: block;
@@ -14,17 +15,14 @@ const override = css`
 `;
 
 const TopicTitle = styled.h2`
-    font-size: 3vw;
+    font-size: 20px;
     color: #F95738;
 `
 
 const WriteArticleButton = styled.button`
     color: #F95738;
-    margin: 5%;
-    margin-top: 0;
-    font-size: 50px;
+    font-size: 20px;
     border: none;
-    background-color: white;
 `
 
 const PageButton = styled.button`
@@ -122,20 +120,20 @@ class Articles extends Component {
             const {topic} = this.props
             const {articles, pages, p} = this.state
             return (
-            <>
+            <ArticlesContainer>
               {(topic ? <TopicTitle>{topic.toUpperCase()}</TopicTitle> : <TopicTitle>ALL ARTICLES</TopicTitle> )}  
               <SortArticles sortArticles={this.sortArticles}/>
-              <ul className="Articles">
+              <ArticleList>
                     {articles.map(article => {
                         return (
                             <ArticleCard key={article.article_id} article={article}/>
                         )
                     })}
-                </ul>
+                </ArticleList>
                 {(p > 1) ? <PageButton id="previous" onClick={(event) => this.handleClick(event)}>⬅</PageButton> : null}
                 {(p < pages) ? <PageButton id="next" onClick={(event) => this.handleClick(event)}>➡</PageButton> : null}<br></br>
                 <p>Want to submit an article? Click <Link to="/submit"><WriteArticleButton>here</WriteArticleButton></Link> </p>
-            </>
+            </ArticlesContainer>
             );
         }
     }

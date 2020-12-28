@@ -10,22 +10,20 @@ import Footer from './components/Footer'
 import PostArticle from './components/PostArticle'
 import Homepage from './components/Homepage';
 import ArticlesByUser from './components/ArticlesByUser';
+import { PageContainer } from './styles.js'
 
-const PageContainer = styled.div`
-  height: auto;
-`
-const User = styled.p`
-  text-align: right;
-  padding-right: 5px;
-  color: #F95738;
-`
+// const User = styled.p`
+//   text-align: right;
+//   padding-right: 5px;
+//   color: #F95738;
+// `
 
 function App() {
   return (
-    <PageContainer className="App">
-      <User>Logged in as cooljmessy</User>
-      <Header/>
+    <PageContainer>
+      {/* <User>Logged in as cooljmessy</User> */}
       <Navigation/>
+      <Header/>
       <Router>
         <Homepage path="/"/>
         <Articles path="/articles"/>
