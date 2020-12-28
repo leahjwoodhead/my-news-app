@@ -15,8 +15,13 @@ const override = css`
 `;
 
 const TopicTitle = styled.h2`
-    font-size: 20px;
+    font-size: 40px;
     color: #F95738;
+    margin-right: 20px;
+
+    @media only screen and (max-width: 600px) {
+        font-size: 20px;
+    }
 `
 
 const WriteArticleButton = styled.button`
@@ -25,10 +30,38 @@ const WriteArticleButton = styled.button`
     border: none;
 `
 
-const PageButton = styled.button`
+const PageButtonLeft = styled.button`
     color: #F95738;
-    font-size: 100px;
+    font-size: 20px;
+    background-color: white;
     border: none;
+`
+const PageButtonRight = styled.button`
+    color: #F95738;
+    font-size: 20px;
+    border: none;
+    background-color: white;
+`
+
+const ArticlesTop = styled.div`
+    grid-area: top;
+    display: flex;
+    align-items: baseline;
+    width: 58%;
+    margin: 0 auto;
+
+    @media only screen and (max-width: 600px) {
+        width: 90%;
+    }
+`
+
+const ArticlesBottom = styled.div`
+    grid-area: bottom;
+    display: flex;
+    width: 58%;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between;
 `
 class Articles extends Component {
 
@@ -121,8 +154,10 @@ class Articles extends Component {
             const {articles, pages, p} = this.state
             return (
             <ArticlesContainer>
-              {(topic ? <TopicTitle>{topic.toUpperCase()}</TopicTitle> : <TopicTitle>ALL ARTICLES</TopicTitle> )}  
-              <SortArticles sortArticles={this.sortArticles}/>
+                <ArticlesTop>
+                    {(topic ? <TopicTitle>{topic.toUpperCase()}</TopicTitle> : <TopicTitle>ALL ARTICLES</TopicTitle> )}  
+                    <SortArticles sortArticles={this.sortArticles}/>
+                </ArticlesTop>
               <ArticleList>
                     {articles.map(article => {
                         return (
@@ -130,9 +165,13 @@ class Articles extends Component {
                         )
                     })}
                 </ArticleList>
-                {(p > 1) ? <PageButton id="previous" onClick={(event) => this.handleClick(event)}>⬅</PageButton> : null}
-                {(p < pages) ? <PageButton id="next" onClick={(event) => this.handleClick(event)}>➡</PageButton> : null}<br></br>
-                <p>Want to submit an article? Click <Link to="/submit"><WriteArticleButton>here</WriteArticleButton></Link> </p>
+                <ArticlesBottom>
+                    <div>
+                        {(p < pages) ? <PageButtonRight id="next" onClick={(event) => this.handleClick(event)}>Next</PageButtonRight> : null}
+                        {(p > 1) ? <PageButtonLeft id="previous" onClick={(event) => this.handleClick(event)}>Previous</PageButtonLeft> : null}
+                    </div>
+                    <p>Want to submit an article? Click <Link to="/submit"><WriteArticleButton>here</WriteArticleButton></Link> </p>
+                </ArticlesBottom>
             </ArticlesContainer>
             );
         }

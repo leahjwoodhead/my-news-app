@@ -23,6 +23,17 @@ export const PageContainer = styled.div`
 
 export const ArticlesContainer = styled.div`
     grid-area: page;
+    display: grid;
+    grid-template-rows: 100px auto 200px;
+    grid-template-areas: 
+        'top'
+        'articles'
+        'bottom';
+
+    @media only screen and (max-width: 600px) {
+        grid-template-rows: 50px auto 50px;
+    }
+
 `
 export const Title = styled.header`
     font-size: 50px;
@@ -60,7 +71,7 @@ export const AppFooter = styled.footer`
 export const ArticleList = styled.ul`
     margin: 0 auto;
     width: 60%;
-    grid-area: page;
+    grid-area: articles;
     display: grid;
     grid-template-columns: 50% 50%;
     padding: 0;
@@ -72,7 +83,7 @@ export const ArticleList = styled.ul`
 `
 
 export const Article = styled.li`
-    margin: 50px;
+    margin: 10px auto;
     width: 95%;
     height: 600px;
     font-size: 15px;
@@ -88,7 +99,7 @@ export const Article = styled.li`
 
     @media only screen and (max-width: 600px) {
         width: 100%;
-        height: auto;
+        height: 600px;
         margin: 10px auto;
     }
 
@@ -97,5 +108,5 @@ export const Article = styled.li`
     }
 
     display: grid;
-    grid-template-rows: 300px 100px 150px 20px 30px;
+    grid-template-rows: 50% 15% 25% 5% 5%;
 `

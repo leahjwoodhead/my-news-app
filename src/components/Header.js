@@ -5,7 +5,7 @@ import { Title } from '../styles'
 const Header = () => {
     return (
         <Title>
-            News Application
+            NC News
         </Title>
     );
 };

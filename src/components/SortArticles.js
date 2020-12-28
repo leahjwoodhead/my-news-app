@@ -1,32 +1,39 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 
-const SortBar = styled.select`
-    font-size: 30px;
-    border: none;
-    background-color: white;
+const SortDiv = styled.div`
+    display: flex;
+`
+
+const SortOption = styled.p`
+    font-size: 20px;
     color: #F95738;
-    width: 300px;
-    padding-left: 10px;
+    font-weight: 500;
+    padding: 10px;
+    transition: transform .2s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+
+    @media only screen and (max-width: 600px) {
+        font-size: 10px;
+    }
 `
 
 class SortArticles extends Component {
 
-    // state = {
-    //     value: 'Latest'
-    // }
-
     handleChange = (event) => {
-        this.props.sortArticles(event.target.value)
+        this.props.sortArticles(event.target.id)
     }
     render() {
         return (
-            <SortBar onChange={(event) => this.handleChange(event)}>
-                <option>Latest</option>
-                <option>Oldest</option>
-                <option>Most Popular</option>
-                <option>Least Popular</option>
-             </SortBar>
+            <SortDiv>
+                <SortOption id="Latest" onClick={(event) => this.handleChange(event)}>Latest</SortOption>
+                <SortOption id="Oldest" onClick={(event) => this.handleChange(event)}>Oldest</SortOption>
+                <SortOption id="Most Popular" onClick={(event) => this.handleChange(event)}>Most Popular</SortOption>
+                <SortOption id="Least Popular" onClick={(event) => this.handleChange(event)}>Least Popular</SortOption>
+            </SortDiv>
         );
     }
 }

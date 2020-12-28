@@ -4,10 +4,11 @@ import Voter from './Voter'
 import {Link} from '@reach/router'
 
 const SingleComment = styled.div`
-    border: 1px solid orange;
+    width: 100%;
     font-size: 15px;
     text-align: left;
     padding-left: 5px;
+    border: 1px solid grey;
 `
 
 const CommentBody = styled.p`

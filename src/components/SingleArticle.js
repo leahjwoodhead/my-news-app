@@ -15,24 +15,39 @@ const override = css`
 `;
 
 const ArticleHolder = styled.article`
-    border: 2px solid orange;
-    margin: 3vw 10vw;
+    margin: 30px auto;
+    width: 90%;
+    background-color: white;
+    border: 1px solid #BFBFBF;
+    box-shadow: 5px 10px 5px #aaaaaa;
     height: auto;
     background-color: white;
 `
 
 const ArticleTitle = styled.h1`
-    font-size: 2vw;
+    font-size: 40px;
     color: grey;
     
 `
 const ArticleBody = styled.p`
-    width: 60%;
-    padding: 50px;
+    width: 80%;
+    margin: 0 auto;
+    text-align: left;
     font-size: 20px;
-    margin: auto;
     font-weight: lighter;
-    font-family: 'Montserrat', sans-serif;;
+
+    @media only screen and (max-width: 600px) {
+        width: 95%;
+        font-size: 16px;
+    }
+`
+
+const ArticleInfo = styled.div`
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    text-align: left;
 `
 
 const DeleteArticle = styled.button`
@@ -116,11 +131,13 @@ class SingleArticle extends Component {
                     <ArticleTitle>{article.title.toUpperCase()}</ArticleTitle>
                     <p>Topic: {article.topic}</p>
                     <ArticleBody>{article.body}</ArticleBody>
-                    <p>By <Link to={`/users/${article.author}`}>{article.author}</Link></p>
-                    <Voter votes={article.votes} id={article_id} type="article"/>
-                    {(article.author === 'cooljmessy' ? <DeleteArticle onClick={() => this.deleteArticle(article.article_id)}>Delete Article</DeleteArticle> : <p></p>)}
+                    <ArticleInfo>
+                        <p>By <Link to={`/users/${article.author}`}>{article.author}</Link></p>
+                        <Voter votes={article.votes} id={article_id} type="article"/>
+                        {(article.author === 'cooljmessy' ? <DeleteArticle onClick={() => this.deleteArticle(article.article_id)}>Delete Article</DeleteArticle> : <p></p>)}
+                    </ArticleInfo>
+                    <Comments id={article_id}/>
                 </ArticleHolder>
-                <Comments id={article_id}/>
                 </>
             );
         }

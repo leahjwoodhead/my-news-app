@@ -9,32 +9,50 @@ import { fetchArticleById } from './api'
 
 
 const ArticleTitle = styled.h2`
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    width: 90%;
     color: black;
-    font-size: 100%;
+    font-size: 20px;
     &:hover {
         color: pink;
     }
 `
-
+const Author = styled.p`
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    align-items: center;
+`
 const BottomCard = styled.div`
+    margin: 0 auto;
+    width: 90%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 `
 const Extract = styled.p`
+    display: flex;
+    align-items: center;
+    width: 90%;
     font-size: 15px;
-    height: auto; 
+    height: auto;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-bottom: 5px;
 `
 const Overlay = styled.div`
     position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  width: 100%;
-  opacity: 0;
-  transition: .5s ease;
-  background-color: #353A47;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #353A47;
 
   &:hover {
       opacity: 1;
@@ -63,7 +81,7 @@ class ArticleCard extends Component {
     componentDidMount() {
         const { article } = this.props
         fetchArticleById(article.article_id).then(article => {
-            const extract = article.body.split(" ").slice(0, 30).join(" ")
+            const extract = article.body.split(" ").slice(0, 40).join(" ")
             this.setState({extract})
         })
     }
@@ -77,21 +95,25 @@ class ArticleCard extends Component {
         return (
             <Link to={`/article/${article.article_id}`} style={{ textDecoration: 'none' }}>
                 <Article type={type}>
+
                     <div>
                         <img src={image} width="100%" height="300px"/>
                         <Overlay>
                             <OverlayText>Topic: {article.topic.slice(0, 1).toUpperCase() + article.topic.slice(1)} </OverlayText>
                         </Overlay>
                     </div>
-                    <ArticleTitle>{article.title}</ArticleTitle>    
+                    
+                        <ArticleTitle>{article.title}</ArticleTitle>    
+                  
                     <Extract>{this.state.extract}...</Extract>
-                    <p>Written by <Link to={`/users/${article.author}`}>{article.author}</Link></p>
+                    <Author>Written by:  <Link to={`/users/${article.author}`}>{article.author}</Link></Author>
                     <BottomCard>
                         <p>🕗 {article.created_at.slice(0, 10)}</p>
                         <p>Votes: {article.votes}</p>
                     </BottomCard>
+                    
                 </Article>
-            </Link>
+                </Link>
         );
     }
 }

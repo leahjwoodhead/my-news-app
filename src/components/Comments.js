@@ -7,8 +7,8 @@ import SortCommentsForm from './SortCommentsForm'
 
 
 const CommentsHolder = styled.div`
-    border: 2px solid orange;
-    margin: 3vw 10vw;
+    margin: 0 auto;
+    width: 80%;
     height: ${props => {
         if (props.expand) return 'auto' 
         else if (props.length < 4) return 'auto'

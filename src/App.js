@@ -1,5 +1,5 @@
 import './App.css';
-import styled from 'styled-components'
+
 import Header from './components/Header';
 import Navigation from './components/Nav'
 import Articles from './components/Articles'
@@ -8,7 +8,6 @@ import { Router } from '@reach/router'
 import ErrorMessage from './components/ErrorMessage';
 import Footer from './components/Footer'
 import PostArticle from './components/PostArticle'
-import Homepage from './components/Homepage';
 import ArticlesByUser from './components/ArticlesByUser';
 import { PageContainer } from './styles.js'
 
@@ -25,7 +24,7 @@ function App() {
       <Navigation/>
       <Header/>
       <Router>
-        <Homepage path="/"/>
+
         <Articles path="/articles"/>
         <Articles path="/articles/:topic"/>
         <ArticlesByUser path="/users/:username"/>
