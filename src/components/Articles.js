@@ -28,6 +28,7 @@ const WriteArticleButton = styled.button`
     color: #F95738;
     font-size: 20px;
     border: none;
+    background-color: white;
 `
 
 const PageButtonLeft = styled.button`

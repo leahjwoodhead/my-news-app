@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
+import { SortDiv, SortOption } from './SortArticles'
 
 class SortCommentsForm extends Component {
 
-    // state = {
-    //     value: 'Latest'
-    // }
-
     handleChange = (event) => {
-        // this.setState({value: event.target.value})
         this.props.updateDisplay(event.target.value)
     }
     render() {
         return (
-         
-            <select  onChange={(event) => this.handleChange(event)}>
-                <option>Latest</option>
-                <option>Older</option>
-                <option>Most Popular</option>
-                <option>Least Popular</option>
-             </select>
+            <SortDiv>
+<               SortOption id="Latest" onClick={(event) => this.handleChange(event)}>Latest</SortOption>
+                <SortOption id="Oldest" onClick={(event) => this.handleChange(event)}>Oldest</SortOption>
+                <SortOption id="Most Popular" onClick={(event) => this.handleChange(event)}>Most Popular</SortOption>
+                <SortOption id="Least Popular" onClick={(event) => this.handleChange(event)}>Least Popular</SortOption>
+            </SortDiv>
+            
         );
     }
 }

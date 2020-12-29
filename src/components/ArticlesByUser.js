@@ -4,12 +4,23 @@ import ArticleCard from './ArticleCard'
 import { css } from "@emotion/core";
 import PacmanLoader from 'react-spinners/PacmanLoader'
 import {navigate } from '@reach/router'
+import {ArticleList} from '../styles'
+import styled from 'styled-components'
 
 const override = css`
   display: block;
   margin: 0 auto;
   border-color: red;
 `;
+
+const UserDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    color:  #F95738;
+    width: 58%;
+    text-align: left;
+    margin: 0 auto;
+`
 
 class ArticlesByUser extends Component {
 
@@ -59,15 +70,17 @@ class ArticlesByUser extends Component {
         } else {
             return (
                 <div>
-                    <h2>{username}'s Articles</h2>
-                    <p>{total} articles found:</p>
-                    <ul className="Articles">
+                    <UserDiv>
+                        <h2>{username}'s Articles</h2>
+                        <p>{total} articles found:</p>
+                    </UserDiv>
+                    <ArticleList className="Articles">
                         {articles.map(article => {
                             return (
                                 <ArticleCard key={article.article_id} article={article}/>
                             )
                         })}
-                    </ul>
+                    </ArticleList>
                 </div>
             );
         } 

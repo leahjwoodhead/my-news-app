@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 
-const SortDiv = styled.div`
+export const SortDiv = styled.div`
     display: flex;
 `
 
-const SortOption = styled.p`
-    font-size: 20px;
+export const SortOption = styled.p`
+    font-size: 15px;
     color: #F95738;
     font-weight: 500;
     padding: 10px;

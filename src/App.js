@@ -25,7 +25,7 @@ function App() {
       <Header/>
       <Router>
 
-        <Articles path="/articles"/>
+        <Articles path="/"/>
         <Articles path="/articles/:topic"/>
         <ArticlesByUser path="/users/:username"/>
         <SingleArticle path="/article/:article_id"/>

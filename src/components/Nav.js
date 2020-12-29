@@ -45,7 +45,7 @@ class Nav extends Component {
         } else {
             return (
                 <NavBar>                  
-                    <Link to="/articles"><NavButton>ALL</NavButton></Link>
+                    <Link to="/"><NavButton>ALL</NavButton></Link>
                     {this.state.topics.map(topic => {
                         return (
                             <Link to={`/articles/${topic.slug}`} key={topic.slug}><NavButton slug={topic.slug

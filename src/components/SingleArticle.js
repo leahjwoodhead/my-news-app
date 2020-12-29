@@ -16,7 +16,7 @@ const override = css`
 
 const ArticleHolder = styled.article`
     margin: 30px auto;
-    width: 90%;
+    width: 80%;
     background-color: white;
     border: 1px solid #BFBFBF;
     box-shadow: 5px 10px 5px #aaaaaa;
@@ -53,8 +53,10 @@ const ArticleInfo = styled.div`
 const DeleteArticle = styled.button`
     border: none;
     font-size: 15px;
-    color: orange;
+    color: #F95738;
     background-color: white;
+    width: 80%;
+    text-align: left;
 
     &:hover {
         background-color: orange;
@@ -132,7 +134,7 @@ class SingleArticle extends Component {
                     <p>Topic: {article.topic}</p>
                     <ArticleBody>{article.body}</ArticleBody>
                     <ArticleInfo>
-                        <p>By <Link to={`/users/${article.author}`}>{article.author}</Link></p>
+                        <p>Written by:  <Link to={`/users/${article.author}`}>{article.author}</Link> @ {article.created_at.slice(11, 16)} {article.created_at.slice(0, 10)}</p>
                         <Voter votes={article.votes} id={article_id} type="article"/>
                         {(article.author === 'cooljmessy' ? <DeleteArticle onClick={() => this.deleteArticle(article.article_id)}>Delete Article</DeleteArticle> : <p></p>)}
                     </ArticleInfo>

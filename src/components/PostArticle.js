@@ -4,17 +4,18 @@ import styled from 'styled-components'
 import { navigate} from '@reach/router'
 
 const ArticleInput = styled.textarea`
-    width: 60%;
-    height: 20vw;
-    border-radius: 10px;
+    width: 80%;
+    height: 300px;
+    
 `
 const ArticleSubmit = styled.input`
-    border: none;
-    font-size: 1vw;
+    font-size: 20px;
     margin: 20px;
-    border: 1px solid;
+    width: 80%;
+    text-align: left;
     color: #DF3B57;
-    margin-bottom: 5vw;
+    background-color: white;
+    border: none;
     &:hover {
         background-color: #DF3B57;
         color: white;
@@ -22,12 +23,29 @@ const ArticleSubmit = styled.input`
 `
 
 const ArticleInfo = styled.div`
-    width: 60%;
+    margin: 50px auto;
+    width: 80%;
     display: flex;
-    justify-content: center;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    flex-direction: column;
+    text-align: left;
+    justify-content: space-evenly;
     color: #DF3B57;
+    
+`
+
+const FormContainer = styled.form`
+    border: 1px solid #BFBFBF;
+    box-shadow: 5px 10px 5px #aaaaaa;
+    width: 80%;
+    margin: 50px auto;
+`
+
+const Labels = styled.p`
+    
+`
+const TitleInput = styled.input`
+    border: none;
+    border-bottom: 1px solid grey;
 `
 
 class PostArticle extends Component {
@@ -80,11 +98,11 @@ class PostArticle extends Component {
             )
         } else {
             return (
-                <form onSubmit={this.handleSubmit}>
+                <FormContainer onSubmit={this.handleSubmit}>
                     <ArticleInfo>
-                        <p>Title: </p>
-                        <input required id="titleInput" value={this.state.titleInput} onChange={(event) => this.handleChange(event)}/>
-                        <p>Topic: </p>
+                        <Labels>Title: </Labels>
+                        <TitleInput required id="titleInput" value={this.state.titleInput} onChange={(event) => this.handleChange(event)}/>
+                        <Labels>Topic: </Labels>
                         <select required id="topic" onChange={(event) => this.handleChange(event)}>
                             <option value="" disabled selected>Select Topic</option>
                             <option>cooking</option>
@@ -94,7 +112,7 @@ class PostArticle extends Component {
                     </ArticleInfo>
                     <ArticleInput required id="textInput" placeholder="Write your article here..."value={this.state.textInput} onChange={(event) => this.handleChange(event)}/><br/>
                     <ArticleSubmit type="submit" value="Submit"/>
-                </form>
+                </FormContainer>
             );
         }
     }

@@ -3,25 +3,37 @@ import styled from 'styled-components'
 import { postComment } from './api'
 
 const CommentFormHolder = styled.div`
-    border: 2px solid orange;
-    margin: 3vw 10vw;
+    margin: 0 auto;
+    width: 70%;
     height: 150px;
     text-align: left;
     padding-left: 10px;
     background-color: white;
-    margin-bottom: 5vw;
     margin-top: 0;
+
+    @media only screen and (max-width: 600px) {
+        font-size: 10px;
+        width: 95%;
+        margin-right: 20px;
+    }
 `
 
 const SubmitButton = styled.input`
     border: none;
-    font-size: 15px;
-    color: orange;
+    font-size: 20px;
+    color: #F95738;
     background-color: white;
+    width: 70%;
+    text-align: left;
 
     &:hover {
         background-color: orange;
         color: black;
+    }
+
+    @media only screen and (max-width: 600px) {
+        font-size: 10px;
+        width: 95%;
     }
 `
 
