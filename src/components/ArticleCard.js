@@ -97,7 +97,7 @@ class ArticleCard extends Component {
                 <Article type={type}>
 
                     <div>
-                        <img src={image} width="100%" height="300px"/>
+                        <img src={image} width="100%" height="300px" alt="article cover"/>
                         <Overlay>
                             <OverlayText>Topic: {article.topic.slice(0, 1).toUpperCase() + article.topic.slice(1)} </OverlayText>
                         </Overlay>
